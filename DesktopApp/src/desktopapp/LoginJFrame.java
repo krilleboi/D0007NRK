@@ -5,6 +5,8 @@
  */
 
 package desktopapp;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -46,7 +48,6 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
-        UsernameInputField.setText("jTextField1");
         UsernameInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameInputFieldActionPerformed(evt);
@@ -56,8 +57,6 @@ public class LoginJFrame extends javax.swing.JFrame {
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
-
-        PasswordInputField.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,6 +97,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         String username=UsernameInputField.getText();
         String password=PasswordInputField.getText();
@@ -111,6 +111,7 @@ public class LoginJFrame extends javax.swing.JFrame {
           if(rs.next()){
               ListCases l= new ListCases();
               l.setVisible(true);
+              dispose();
           }
           else{
               JOptionPane.showMessageDialog(null, "Login has Failed. You have entered an Incorrect Username and/or Password");
