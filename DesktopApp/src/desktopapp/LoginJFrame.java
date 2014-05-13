@@ -5,6 +5,9 @@
  */
 
 package desktopapp;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -110,7 +113,7 @@ public class LoginJFrame extends javax.swing.JFrame {
               l.setVisible(true);
           }
           else{
-              JOptionPane.showNessageDialog(null, "Login has Failed. You have entered an Incorrect Username and/or Password");
+              JOptionPane.showMessageDialog(null, "Login has Failed. You have entered an Incorrect Username and/or Password");
           }
           
       } catch (ClassNotFoundException | SQLException ex) {
