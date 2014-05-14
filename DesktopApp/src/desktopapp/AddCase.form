@@ -56,9 +56,9 @@
               <Component id="BudgetedTimeField" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Component id="CategoryBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="CategoryBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="CreatedByField" min="-2" max="-2" attributes="0"/>
@@ -130,14 +130,26 @@
         <Property name="text" type="java.lang.String" value="Status"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="CategoryBox">
+    <Component class="javax.swing.JComboBox" name="StatusBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="Created"/>
+          </StringArray>
+        </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="StatusBox">
+    <Component class="javax.swing.JComboBox" name="CategoryBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="Network"/>
+            <StringItem index="2" value="User"/>
+            <StringItem index="3" value="Security"/>
+            <StringItem index="4" value="Application"/>
+          </StringArray>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

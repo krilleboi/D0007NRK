@@ -47,8 +47,8 @@ public class AddCase extends javax.swing.JFrame {
         jButtonSave = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        CategoryBox = new javax.swing.JTextField();
-        StatusBox = new javax.swing.JTextField();
+        StatusBox = new javax.swing.JComboBox();
+        CategoryBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,9 +74,9 @@ public class AddCase extends javax.swing.JFrame {
 
         jLabel7.setText("Status");
 
-        CategoryBox.setText("jTextField1");
+        StatusBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Created" }));
 
-        StatusBox.setText("jTextField2");
+        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Network", "User", "Security", "Application" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +97,7 @@ public class AddCase extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(StatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CategoryBox))
+                    .addComponent(CategoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(298, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,9 +111,9 @@ public class AddCase extends javax.swing.JFrame {
                 .addComponent(BudgetedTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(9, 9, 9)
-                .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CreatedByField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,14 +140,15 @@ public class AddCase extends javax.swing.JFrame {
         
         
         try {
-            String sql = "Insert into Case(Status, BudgetedTime, Category)values(?,?,?)";
+            String sql = "Insert into `Case`(Status,BudgetedTime,Category,CreatedBy)values(?,?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
             PreparedStatement s= con.prepareStatement(sql);
             
-            s.setString(1, StatusBox.getText());
+            s.setString(1, StatusBox.getSelectedItem().toString());
             s.setString(2, BudgetedTimeField.getText());
-            s.setString(3, CategoryBox.getText());
+            s.setString(3, CategoryBox.getSelectedItem().toString());
+            s.setString(4, CreatedByField.getText());
             s.execute();
             
             JOptionPane.showMessageDialog(null, "You have saved your case!");
@@ -201,9 +202,9 @@ public class AddCase extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BudgetedTimeField;
-    private javax.swing.JTextField CategoryBox;
+    private javax.swing.JComboBox CategoryBox;
     private javax.swing.JTextField CreatedByField;
-    private javax.swing.JTextField StatusBox;
+    private javax.swing.JComboBox StatusBox;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
