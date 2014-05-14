@@ -9,7 +9,10 @@ package desktopapp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +25,35 @@ public class AddTask extends javax.swing.JFrame {
      * Creates new form AddTask
      */
     public AddTask() {
+        indexCategories();
         initComponents();
+    }
+    private ArrayList<String> CaseId = new ArrayList<>();
+    private ArrayList<String> BudgetedTime = new ArrayList<>();
+ 
+    AddTask(String username) {
+        this.UserName = username;
+        
+        indexCategories();
+        initComponents();        
+    }
+ 
+   
+    private void indexCategories() {
+        //gets the data from the category table
+ 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk", "d0007nrk", "d0007nrk");
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from 'Case'");
+            while (rs.next()) {
+                CaseId.add(rs.getString("CaseId"));
+                BudgetedTime.add(rs.getString("BudgetedTime"));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Exception occur :" + ex);
+        }
     }
 
     /**
@@ -48,8 +79,8 @@ public class AddTask extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         StatusBox = new javax.swing.JComboBox();
-        CaseField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        CaseIdBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,27 +112,28 @@ public class AddTask extends javax.swing.JFrame {
 
         jLabel7.setText("Case");
 
+        CaseIdBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TaskField)
-                        .addComponent(StatusBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                        .addComponent(CategoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CaseField)))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TaskField)
+                    .addComponent(StatusBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(CategoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CaseIdBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,9 +159,9 @@ public class AddTask extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CaseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CaseIdBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -153,7 +185,16 @@ public class AddTask extends javax.swing.JFrame {
             t.setString(2, StatusBox.getSelectedItem().toString());
             t.setString(3, CategoryBox.getSelectedItem().toString());
             t.setString(4, DescritionArea.getText());
-            t.setString(5, CaseField.getText());
+            
+            //converts categoryNames to categoryID
+            String CId = null;
+            for (int i = 0; i < BudgetedTime.size(); i++) {
+                int test = 000;
+                if (BudgetedTime.get(i).equals(CaseIdBox.getSelectedItem().toString())) {
+                    CId = (CaseId.get(i));
+                }
+            }
+            t.setString(5, CId);
             t.execute();
             
             JOptionPane.showMessageDialog(null, "You have saved your Task!");
@@ -203,7 +244,7 @@ public class AddTask extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CaseField;
+    private javax.swing.JComboBox CaseIdBox;
     private javax.swing.JComboBox CategoryBox;
     private javax.swing.JTextArea DescritionArea;
     private javax.swing.JButton SaveButton;
