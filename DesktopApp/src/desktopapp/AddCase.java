@@ -49,15 +49,13 @@ public class AddCase extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         StatusBox = new javax.swing.JComboBox();
         CategoryBox = new javax.swing.JComboBox();
+        AddTaskButton = new javax.swing.JButton();
+        ReturnToCaseListButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Add new Case");
-
-        BudgetedTimeField.setText("jTextField1");
-
-        CreatedByField.setText("jTextField4");
 
         jLabel2.setText("Budgeted Time");
 
@@ -78,27 +76,47 @@ public class AddCase extends javax.swing.JFrame {
 
         CategoryBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Network", "User", "Security", "Application" }));
 
+        AddTaskButton.setText("Add Task");
+        AddTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTaskButtonActionPerformed(evt);
+            }
+        });
+
+        ReturnToCaseListButton.setText("Return to Case List");
+        ReturnToCaseListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnToCaseListButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(BudgetedTimeField)
-                    .addComponent(CreatedByField)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSave)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(StatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CategoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(298, Short.MAX_VALUE))
+                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AddTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ReturnToCaseListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(BudgetedTimeField)
+                        .addComponent(CreatedByField)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(StatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CategoryBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +145,11 @@ public class AddCase extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(StatusBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addComponent(jButtonSave)
-                .addGap(58, 58, 58))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReturnToCaseListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -152,9 +173,8 @@ public class AddCase extends javax.swing.JFrame {
             s.execute();
             
             JOptionPane.showMessageDialog(null, "You have saved your case!");
-            AddTask a= new AddTask();
-            a.setVisible(true);
-            dispose();
+            
+            
                     
             
        
@@ -164,6 +184,18 @@ public class AddCase extends javax.swing.JFrame {
           
         
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void AddTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTaskButtonActionPerformed
+        AddTask a= new AddTask();
+              a.setVisible(true);
+              dispose();
+    }//GEN-LAST:event_AddTaskButtonActionPerformed
+
+    private void ReturnToCaseListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnToCaseListButtonActionPerformed
+        ListCases l= new ListCases();
+              l.setVisible(true);
+              dispose();
+    }//GEN-LAST:event_ReturnToCaseListButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,9 +233,11 @@ public class AddCase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddTaskButton;
     private javax.swing.JTextField BudgetedTimeField;
     private javax.swing.JComboBox CategoryBox;
     private javax.swing.JTextField CreatedByField;
+    private javax.swing.JButton ReturnToCaseListButton;
     private javax.swing.JComboBox StatusBox;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JLabel jLabel1;

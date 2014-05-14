@@ -23,25 +23,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="BudgetedTimeField" max="32767" attributes="0"/>
-                  <Component id="CreatedByField" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" pref="120" max="-2" attributes="0"/>
-                  <Component id="jButtonSave" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="StatusBox" min="-2" pref="258" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jButtonSave" min="-2" pref="166" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="AddTaskButton" min="-2" pref="166" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="ReturnToCaseListButton" min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
-                  <Component id="CategoryBox" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="BudgetedTimeField" max="32767" attributes="0"/>
+                      <Component id="CreatedByField" max="32767" attributes="0"/>
+                      <Component id="jLabel3" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="StatusBox" min="-2" pref="258" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
+                      <Component id="CategoryBox" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="298" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,8 +83,12 @@
                   </Group>
               </Group>
               <EmptySpace pref="151" max="32767" attributes="0"/>
-              <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonSave" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="AddTaskButton" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="ReturnToCaseListButton" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,14 +103,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="BudgetedTimeField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="CreatedByField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -151,6 +157,22 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AddTaskButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Task"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddTaskButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ReturnToCaseListButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Return to Case List"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReturnToCaseListButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
