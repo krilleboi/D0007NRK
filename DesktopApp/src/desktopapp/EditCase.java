@@ -195,12 +195,6 @@ public class EditCase extends javax.swing.JFrame {
             s.setString(5, AttestedCheckBox.getAction().toString());
             s.execute();
             
-            
-            
-            
-            
-            
-            
             JOptionPane.showMessageDialog(null, "You have saved your case!");
             ListCases l= new ListCases();
             l.setVisible(true);
