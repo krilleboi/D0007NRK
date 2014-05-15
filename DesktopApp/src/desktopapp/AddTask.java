@@ -114,6 +114,7 @@ public class AddTask extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${caseId}"));
         columnBinding.setColumnName("Case Id");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         CaseTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,6 +123,9 @@ public class AddTask extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(CaseTable);
+        if (CaseTable.getColumnModel().getColumnCount() > 0) {
+            CaseTable.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jLabel6.setText("Created Cases");
 
