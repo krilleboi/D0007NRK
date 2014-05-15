@@ -44,6 +44,8 @@ public class EditCase extends javax.swing.JFrame {
         caseList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : caseQuery2.getResultList();
         caseQuery3 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Case c");
         caseList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : caseQuery3.getResultList();
+        caseQuery4 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Case c");
+        caseList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : caseQuery4.getResultList();
         jLabel1 = new javax.swing.JLabel();
         SaveEditsButton = new javax.swing.JButton();
         StatusBox = new javax.swing.JComboBox();
@@ -99,7 +101,7 @@ public class EditCase extends javax.swing.JFrame {
 
         CaseBox.setMaximumRowCount(250);
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, caseList3, CaseBox);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, caseList4, CaseBox);
         bindingGroup.addBinding(jComboBoxBinding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,20 +115,9 @@ public class EditCase extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AttestedCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
                         .addComponent(SaveEditsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(442, 442, 442))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(CategoryBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(StatusBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,7 +126,16 @@ public class EditCase extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(CaseBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(CategoryBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(StatusBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +183,7 @@ public class EditCase extends javax.swing.JFrame {
         String CaseID = CaseBox.getSelectedItem().toString();
         
         try {
-            String sql = "Update `Case` where `Case`='"+CaseID+"' (Comment, Category, Status, Description, Attested)values(?,?,?,?,?) ";
+            String sql = "Update `Case` where `CaseId`='"+CaseID+"' (Comment, Category, Status, Description, Attested)values(?,?,?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
             PreparedStatement s= con.prepareStatement(sql);
@@ -254,10 +254,12 @@ public class EditCase extends javax.swing.JFrame {
     private java.util.List<desktopapp.Case> caseList1;
     private java.util.List<desktopapp.Case> caseList2;
     private java.util.List<desktopapp.Case> caseList3;
+    private java.util.List<desktopapp.Case> caseList4;
     private javax.persistence.Query caseQuery;
     private javax.persistence.Query caseQuery1;
     private javax.persistence.Query caseQuery2;
     private javax.persistence.Query caseQuery3;
+    private javax.persistence.Query caseQuery4;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
