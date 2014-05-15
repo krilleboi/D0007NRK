@@ -14,12 +14,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 
 /**
  *
  * @author Kristoffer
  */
 public class AddTask extends javax.swing.JFrame {
+    
+
+
+        private String Starta = "Started";
+
 
     /**
      * Creates new form AddTask
@@ -29,7 +39,9 @@ public class AddTask extends javax.swing.JFrame {
     public AddTask() {
         initComponents();
     }
- 
+    DateTime dt = new DateTime();
+    DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+    String dtStr = fmt.print(dt);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,7 +118,7 @@ public class AddTask extends javax.swing.JFrame {
 
         jLabel5.setText("Description");
 
-        StatusBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Created" }));
+        StatusBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Created", "Started" }));
 
         jLabel7.setText("Case");
 
@@ -227,11 +239,11 @@ public class AddTask extends javax.swing.JFrame {
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
 
         // TODO add your handling code here:
-        
+
         
         
         try {
-            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId)values(?,?,?,?,?)";
+            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId,StartTime)values(?,?,?,?,?,?)";
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
             PreparedStatement t= con.prepareStatement(sql);
@@ -241,7 +253,16 @@ public class AddTask extends javax.swing.JFrame {
             t.setString(3, CategoryBox.getSelectedItem().toString());
             t.setString(4, DescritionArea.getText());
             t.setString(5, CaseIdField.getText());
+
+
+            if(StatusBox.getSelectedItem().equals(Starta)) {
+                t.setString(6, dtStr);
+            }else{
+                t.setString(6, null);
+            }
+                
             t.execute();
+            
             
             JOptionPane.showMessageDialog(null, "You have saved your Task!");
             
