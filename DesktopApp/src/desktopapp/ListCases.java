@@ -145,7 +145,7 @@ public class ListCases extends javax.swing.JFrame {
             EditCase val;
             
             
-            
+       
             val = new EditCase(target.getValueAt(rad, 0).toString());
             val.setVisible(true);
           
