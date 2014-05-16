@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JTable;
 
 /**
  *
@@ -21,7 +23,16 @@ public class ListCases extends javax.swing.JFrame {
      * Creates new form ListCases
      */
     public ListCases() {
-        initComponents();
+        initComponents();        
+        
+        try{
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+          Statement st=con.createStatement();
+          
+        } catch (ClassNotFoundException | SQLException ex) {
+          System.out.println("Exception has occured : " + ex);
+      }
     }
 
     /**
@@ -39,16 +50,15 @@ public class ListCases extends javax.swing.JFrame {
         caseList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : caseQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        CaseJtable = new javax.swing.JTable();
         AddCaseButton = new javax.swing.JButton();
-        EditCaseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Cases");
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, caseList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, caseList, CaseJtable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${caseId}"));
         columnBinding.setColumnName("Case Id");
         columnBinding.setColumnClass(Integer.class);
@@ -67,25 +77,23 @@ public class ListCases extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        CaseJtable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CaseJtableMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(CaseJtable);
+        if (CaseJtable.getColumnModel().getColumnCount() > 0) {
+            CaseJtable.getColumnModel().getColumn(0).setResizable(false);
+            CaseJtable.getColumnModel().getColumn(1).setResizable(false);
+            CaseJtable.getColumnModel().getColumn(2).setResizable(false);
+            CaseJtable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         AddCaseButton.setText("Add Case");
         AddCaseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddCaseButtonActionPerformed(evt);
-            }
-        });
-
-        EditCaseButton.setText("Edit Case");
-        EditCaseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditCaseButtonActionPerformed(evt);
             }
         });
 
@@ -101,9 +109,7 @@ public class ListCases extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AddCaseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(EditCaseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(AddCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -115,8 +121,6 @@ public class ListCases extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(AddCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(EditCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,13 +138,19 @@ public class ListCases extends javax.swing.JFrame {
               dispose();
     }//GEN-LAST:event_AddCaseButtonActionPerformed
 
-    private void EditCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCaseButtonActionPerformed
-
-        
-       EditCase e= new EditCase();
-       e.setVisible(true);
-       dispose();
-    }//GEN-LAST:event_EditCaseButtonActionPerformed
+    private void CaseJtableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaseJtableMousePressed
+        if (evt.getClickCount()==2) {
+            JTable target = (JTable) evt.getSource();
+            int rad = target.getSelectedRow();
+            EditCase val;
+            
+            
+            
+            val = new EditCase(target.getValueAt(rad, 0).toString());
+            val.setVisible(true);
+          
+            }
+    }//GEN-LAST:event_CaseJtableMousePressed
 
     /**
      * @param args the command line arguments
@@ -179,13 +189,12 @@ public class ListCases extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCaseButton;
-    private javax.swing.JButton EditCaseButton;
+    private javax.swing.JTable CaseJtable;
     private java.util.List<desktopapp.Case> caseList;
     private javax.persistence.Query caseQuery;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
