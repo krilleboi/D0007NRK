@@ -32,8 +32,8 @@ public class EditCase extends javax.swing.JFrame {
     EditCase(String caseId) {
         this.caseId = caseId;
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/ gsdfgsdfgdfg", "werawsfdsdfa", "sgdergdfgsdfg");
-            String SQL = ("SELECT * FROM `tasks` WHERE `ID ELLER nÅT dasdfsdfsdf`= " + caseId);
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+            String SQL = ("SELECT * FROM `tasks` WHERE `CaseId`= " + caseId);
             PreparedStatement st = con.prepareStatement(SQL);
             ResultSet rs = st.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(rs));
