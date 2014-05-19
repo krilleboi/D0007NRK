@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package desktopapp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -22,12 +23,25 @@ public class EditCase extends javax.swing.JFrame {
     /**
      * Creates new form EditCase
      */
+    String caseId;
+
     public EditCase() {
         initComponents();
     }
 
-    EditCase(String toString) {
+    EditCase(String caseId) {
+        this.caseId = caseId;
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/ gsdfgsdfgdfg", "werawsfdsdfa", "sgdergdfgsdfg");
+            String SQL = ("SELECT * FROM `tasks` WHERE `ID ELLER nÅT dasdfsdfsdf`= " + caseId);
+            PreparedStatement st = con.prepareStatement(SQL);
+            ResultSet rs = st.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (SQLException e) {
+
+        }
         initComponents();
+
     }
 
     /**
