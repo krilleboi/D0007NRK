@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>desktopapp.Case</class>
     <class>desktopapp.Task</class>
+    <class>desktopapp.Staff</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="d0007nrk"/>
