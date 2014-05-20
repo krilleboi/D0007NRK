@@ -6,6 +6,12 @@
 
 package desktopapp;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JTable;
+
 /**
  *
  * @author Rikard
@@ -17,6 +23,14 @@ public class ListTasks extends javax.swing.JFrame {
      */
     public ListTasks() {
         initComponents();
+        try{
+          Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+          Statement st=con.createStatement();
+          
+        } catch (ClassNotFoundException | SQLException ex) {
+          System.out.println("Exception has occured : " + ex);
+      }
     }
 
     /**
@@ -62,6 +76,11 @@ public class ListTasks extends javax.swing.JFrame {
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        TaskList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TaskListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TaskList);
         if (TaskList.getColumnModel().getColumnCount() > 0) {
             TaskList.getColumnModel().getColumn(0).setResizable(false);
@@ -116,6 +135,20 @@ public class ListTasks extends javax.swing.JFrame {
         AddTask t= new AddTask();
         t.setVisible(true);
     }//GEN-LAST:event_AddTaskButtonActionPerformed
+
+    private void TaskListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaskListMouseClicked
+if (evt.getClickCount()==2) {
+            JTable target = (JTable) evt.getSource();
+            int raden = target.getSelectedRow();
+            ViewTask val;
+            
+            
+       
+            val = new ViewTask(target.getValueAt(raden, 0).toString());
+            val.setVisible(true);
+          
+            }        // TODO add your handling code here:
+    }//GEN-LAST:event_TaskListMouseClicked
 
     /**
      * @param args the command line arguments
