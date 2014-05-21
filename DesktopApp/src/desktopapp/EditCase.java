@@ -78,6 +78,7 @@ public class EditCase extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         CommentArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        SaveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +117,13 @@ public class EditCase extends javax.swing.JFrame {
 
         jLabel2.setText("Comment");
 
+        SaveButton.setText("jButton1");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,6 +140,10 @@ public class EditCase extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SaveButton)
+                .addGap(281, 281, 281))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,11 +158,34 @@ public class EditCase extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SaveButton)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        
+        
+        try {
+        String sql = "Insert into `Case` (Comment) value (?) WHERE `CaseId`= " + caseId;
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        PreparedStatement s= con.prepareStatement(sql);
+            
+            s.setString(1, CommentArea.getText());      
+            s.execute();
+            
+            JOptionPane.showMessageDialog(null, "You have saved your Comment!");
+            
+    } catch (SQLException ex) {
+          System.out.println("Exception has occured : " + ex);
+        }
+    
+    
+        
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +225,7 @@ public class EditCase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AttestedBox;
     private javax.swing.JTextArea CommentArea;
+    private javax.swing.JButton SaveButton;
     private java.util.List<desktopapp.Case> caseList;
     private java.util.List<desktopapp.Case> caseList1;
     private java.util.List<desktopapp.Case> caseList2;
