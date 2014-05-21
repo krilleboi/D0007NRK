@@ -51,7 +51,8 @@ public class ListCases extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         CaseJtable = new javax.swing.JTable();
-        AddCaseButton = new javax.swing.JButton();
+        ReturnButton = new javax.swing.JButton();
+        AddCaseButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,10 +91,17 @@ public class ListCases extends javax.swing.JFrame {
             CaseJtable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        AddCaseButton.setText("Add Case");
-        AddCaseButton.addActionListener(new java.awt.event.ActionListener() {
+        ReturnButton.setText("Return to start");
+        ReturnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddCaseButtonActionPerformed(evt);
+                ReturnButtonActionPerformed(evt);
+            }
+        });
+
+        AddCaseButton1.setText("Add Case");
+        AddCaseButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCaseButton1ActionPerformed(evt);
             }
         });
 
@@ -108,9 +116,14 @@ public class ListCases extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(AddCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(29, 29, 29)
+                .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(616, Short.MAX_VALUE)
+                    .addComponent(AddCaseButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +133,17 @@ public class ListCases extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 89, Short.MAX_VALUE))))
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(112, 112, 112)
+                    .addComponent(AddCaseButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(133, Short.MAX_VALUE)))
         );
 
         bindingGroup.bind();
@@ -132,11 +151,11 @@ public class ListCases extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCaseButtonActionPerformed
-        AddCase a= new AddCase();
+    private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
+        MainMenu a= new MainMenu();
               a.setVisible(true);
               dispose();
-    }//GEN-LAST:event_AddCaseButtonActionPerformed
+    }//GEN-LAST:event_ReturnButtonActionPerformed
 
     private void CaseJtableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaseJtableMousePressed
         if (evt.getClickCount()==2) {
@@ -151,6 +170,10 @@ public class ListCases extends javax.swing.JFrame {
           
             }
     }//GEN-LAST:event_CaseJtableMousePressed
+
+    private void AddCaseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCaseButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddCaseButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,8 +211,9 @@ public class ListCases extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddCaseButton;
+    private javax.swing.JButton AddCaseButton1;
     private javax.swing.JTable CaseJtable;
+    private javax.swing.JButton ReturnButton;
     private java.util.List<desktopapp.Case> caseList;
     private javax.persistence.Query caseQuery;
     private javax.persistence.EntityManager entityManager;
