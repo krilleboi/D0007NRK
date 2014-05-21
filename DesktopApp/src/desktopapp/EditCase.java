@@ -170,7 +170,7 @@ public class EditCase extends javax.swing.JFrame {
         
         
         try {
-        String sql = "Insert into `Case` (Comment) value (?) WHERE `CaseId`= " + caseId;
+        String sql = "Update `Case` SET Comment = (?) WHERE CaseId =" + caseId;
         Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
         PreparedStatement s= con.prepareStatement(sql);
             
