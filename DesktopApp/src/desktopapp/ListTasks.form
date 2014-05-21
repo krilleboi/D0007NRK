@@ -54,9 +54,9 @@
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="546" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="AddTaskButton" min="-2" pref="166" max="-2" attributes="0"/>
-                          <Component id="ReturnButton" min="-2" pref="166" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="ReturnButton" pref="166" max="32767" attributes="0"/>
+                          <Component id="AddTaskButton" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
