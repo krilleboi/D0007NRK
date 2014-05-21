@@ -109,8 +109,8 @@ public class LoginJFrame extends javax.swing.JFrame {
           ResultSet rs=st.executeQuery("select * from Staff where UserName='"+username+"' and Password='"+password+"' and ProcessLead='1'");
           
           if(rs.next()){
-              ListCases l= new ListCases();
-              l.setVisible(true);
+              MainMenu m= new MainMenu();
+              m.setVisible(true);
               dispose();
           }
           else{
