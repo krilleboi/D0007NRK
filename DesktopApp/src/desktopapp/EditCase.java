@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -46,6 +49,11 @@ public class EditCase extends javax.swing.JFrame {
         
 
     }
+    private String Starta = "Started";
+    private String Complet = "Completed";
+    DateTime dt = new DateTime();
+    DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+    String dtStr = fmt.print(dt);
     
     private void loadCase(){
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -79,6 +87,8 @@ public class EditCase extends javax.swing.JFrame {
         CommentArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         SaveButton = new javax.swing.JButton();
+        CompleteCaseButton = new javax.swing.JButton();
+        StartCaseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,10 +127,24 @@ public class EditCase extends javax.swing.JFrame {
 
         jLabel2.setText("Comment");
 
-        SaveButton.setText("jButton1");
+        SaveButton.setText("Save Edits");
         SaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveButtonActionPerformed(evt);
+            }
+        });
+
+        CompleteCaseButton.setText("Complete Case");
+        CompleteCaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompleteCaseButtonActionPerformed(evt);
+            }
+        });
+
+        StartCaseButton.setText("Start Case");
+        StartCaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartCaseButtonActionPerformed(evt);
             }
         });
 
@@ -142,8 +166,12 @@ public class EditCase extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(StartCaseButton)
+                .addGap(33, 33, 33)
+                .addComponent(CompleteCaseButton)
+                .addGap(179, 179, 179)
                 .addComponent(SaveButton)
-                .addGap(281, 281, 281))
+                .addGap(129, 129, 129))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +187,10 @@ public class EditCase extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SaveButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveButton)
+                    .addComponent(CompleteCaseButton)
+                    .addComponent(StartCaseButton))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
 
@@ -186,6 +217,41 @@ public class EditCase extends javax.swing.JFrame {
     
         
     }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void StartCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartCaseButtonActionPerformed
+        
+        try {
+        String sql = "Update `Case` SET Status = (?), StartTime = (?) WHERE CaseId =" + caseId;
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        PreparedStatement s= con.prepareStatement(sql);
+            
+            s.setString(1, Starta);
+            s.setString(2, dtStr); 
+            s.execute();
+            
+            JOptionPane.showMessageDialog(null, "You have started the case!");
+            
+    } catch (SQLException ex) {
+          System.out.println("Exception has occured : " + ex);
+        }
+    }//GEN-LAST:event_StartCaseButtonActionPerformed
+
+    private void CompleteCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteCaseButtonActionPerformed
+        try {
+        String sql = "Update `Case` SET Status = (?), EndTime = (?) WHERE CaseId =" + caseId;
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        PreparedStatement s= con.prepareStatement(sql);
+            
+            s.setString(1, Complet);
+            s.setString(2, dtStr); 
+            s.execute();
+            
+            JOptionPane.showMessageDialog(null, "You have completed the case!");
+            
+    } catch (SQLException ex) {
+          System.out.println("Exception has occured : " + ex);
+        }
+    }//GEN-LAST:event_CompleteCaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,7 +291,9 @@ public class EditCase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AttestedBox;
     private javax.swing.JTextArea CommentArea;
+    private javax.swing.JButton CompleteCaseButton;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton StartCaseButton;
     private java.util.List<desktopapp.Case> caseList;
     private java.util.List<desktopapp.Case> caseList1;
     private java.util.List<desktopapp.Case> caseList2;
