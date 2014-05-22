@@ -263,7 +263,7 @@ public class EditCase extends javax.swing.JFrame {
     }//GEN-LAST:event_CompleteCaseButtonActionPerformed
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
-              MainMenu m= new MainMenu();
+              ListCases m= new ListCases();
               m.setVisible(true);
               dispose();
     }//GEN-LAST:event_ReturnButtonActionPerformed

@@ -159,8 +159,8 @@ if (evt.getClickCount()==2) {
        
             val = new ViewTask(target.getValueAt(raden, 0).toString());
             val.setVisible(true);
-          
-            }        // TODO add your handling code here:
+            dispose();
+            }
     }//GEN-LAST:event_TaskListMouseClicked
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed

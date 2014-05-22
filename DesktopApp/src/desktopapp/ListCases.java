@@ -167,12 +167,15 @@ public class ListCases extends javax.swing.JFrame {
        
             val = new EditCase(target.getValueAt(rad, 0).toString());
             val.setVisible(true);
-          
+            dispose();
             }
+
     }//GEN-LAST:event_CaseJtableMousePressed
 
     private void AddCaseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCaseButton1ActionPerformed
-        // TODO add your handling code here:
+              AddCase a= new AddCase();
+              a.setVisible(true);
+              dispose();
     }//GEN-LAST:event_AddCaseButton1ActionPerformed
 
     /**
