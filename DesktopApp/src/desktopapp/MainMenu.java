@@ -92,14 +92,14 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void CasesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CasesButtonActionPerformed
         ListCases l= new ListCases();
-        l.setVisible(true);
-        dispose();
+        l.setVisible(true); // öppnar case list
+        dispose();  // stänger ner main menu
     }//GEN-LAST:event_CasesButtonActionPerformed
 
     private void TasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TasksButtonActionPerformed
         ListTasks l= new ListTasks();
-        l.setVisible(true);
-        dispose();
+        l.setVisible(true);  // öppnar list task
+        dispose();  // stänger main menu
     }//GEN-LAST:event_TasksButtonActionPerformed
 
     /**

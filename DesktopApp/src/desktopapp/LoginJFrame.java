@@ -105,17 +105,17 @@ public class LoginJFrame extends javax.swing.JFrame {
         
       try {
           Class.forName("com.mysql.jdbc.Driver");
-          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // koppling till databasen
           Statement st=con.createStatement();
-          ResultSet rs=st.executeQuery("select * from Staff where UserName='"+username+"' and Password='"+password+"' and ProcessLead='1'");
+          ResultSet rs=st.executeQuery("select * from Staff where UserName='"+username+"' and Password='"+password+"' and ProcessLead='1'");  // SQL query som kollar att inmatat lösenord och användarnamn stämmer med det som finns i databasen. kollar även så att användaren är processledare
           
           if(rs.next()){
               MainMenu m= new MainMenu();
-              m.setVisible(true);
-              dispose();
+              m.setVisible(true); // öppnar main menu
+              dispose(); // stänger ner inloggningsfönstret
           }
           else{
-              JOptionPane.showMessageDialog(null, "Login has Failed. You have entered an Incorrect Username and/or Password");
+              JOptionPane.showMessageDialog(null, "Login has Failed. You have entered an Incorrect Username and/or Password"); // error vid felinmatat lösenord eller användarnamn
           }
           
       } catch (ClassNotFoundException | SQLException ex) {

@@ -161,18 +161,18 @@ public class AddCase extends javax.swing.JFrame {
         
         
         try {
-            String sql = "Insert into `Case`(Status,BudgetedTime,Category,CreatedBy)values(?,?,?,?)";
+            String sql = "Insert into `Case`(Status,BudgetedTime,Category,CreatedBy)values(?,?,?,?)";  // sql string
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");  // databas connection
             PreparedStatement s= con.prepareStatement(sql);
             
-            s.setString(1, StatusBox.getSelectedItem().toString());
-            s.setString(2, BudgetedTimeField.getText());
-            s.setString(3, CategoryBox.getSelectedItem().toString());
-            s.setString(4, CreatedByField.getText());
-            s.execute();
+            s.setString(1, StatusBox.getSelectedItem().toString());  // hämtar string som användaren matat in
+            s.setString(2, BudgetedTimeField.getText());  // hämtar string som användaren matat in
+            s.setString(3, CategoryBox.getSelectedItem().toString());  // hämtar string som användaren matat in
+            s.setString(4, CreatedByField.getText());  // hämtar string som användaren matat in
+            s.execute();  
             
-            JOptionPane.showMessageDialog(null, "You have saved your case!");
+            JOptionPane.showMessageDialog(null, "You have saved your case!");  // meddelande att nytt case lagts till
             
             
                     
@@ -187,14 +187,14 @@ public class AddCase extends javax.swing.JFrame {
 
     private void AddTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTaskButtonActionPerformed
         AddTask a= new AddTask();
-              a.setVisible(true);
-              dispose();
+              a.setVisible(true); // öppnar add task
+              dispose(); // stänger add case
     }//GEN-LAST:event_AddTaskButtonActionPerformed
 
     private void ReturnToCaseListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnToCaseListButtonActionPerformed
         ListCases l= new ListCases();
-              l.setVisible(true);
-              dispose();
+              l.setVisible(true);  // öppnar list cases
+              dispose();  // stänger add case
     }//GEN-LAST:event_ReturnToCaseListButtonActionPerformed
 
     /**

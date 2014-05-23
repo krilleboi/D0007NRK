@@ -25,7 +25,7 @@ public class ListTasks extends javax.swing.JFrame {
         initComponents();
         try{
           Class.forName("com.mysql.jdbc.Driver");
-          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // Db connection
           Statement st=con.createStatement();
           
         } catch (ClassNotFoundException | SQLException ex) {
@@ -146,27 +146,28 @@ public class ListTasks extends javax.swing.JFrame {
 
     private void AddTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTaskButtonActionPerformed
         AddTask t= new AddTask();
-        t.setVisible(true);
+        t.setVisible(true); // öppnar add task
+        dispose(); // stänger ned fönstret
     }//GEN-LAST:event_AddTaskButtonActionPerformed
 
     private void TaskListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaskListMouseClicked
-if (evt.getClickCount()==2) {
+        if (evt.getClickCount()==2) { // clickcounten är satt till 2, dubbelklick på ett task krävs för att öppna det
             JTable target = (JTable) evt.getSource();
             int raden = target.getSelectedRow();
             ViewTask val;
             
             
        
-            val = new ViewTask(target.getValueAt(raden, 0).toString());
-            val.setVisible(true);
-            dispose();
+            val = new ViewTask(target.getValueAt(raden, 0).toString()); // Val blir det valda värdet, dvs detta värde är det task som öppnas
+            val.setVisible(true); //öppnar viewtask
+            dispose(); // Stänger ned fönstret
             }
     }//GEN-LAST:event_TaskListMouseClicked
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
         MainMenu a= new MainMenu();
-              a.setVisible(true);
-              dispose();
+              a.setVisible(true); // öppnar huvudmenyn
+              dispose(); // Stänger ned fönstret
     }//GEN-LAST:event_ReturnButtonActionPerformed
 
     /**

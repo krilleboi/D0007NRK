@@ -27,7 +27,7 @@ public class ListCases extends javax.swing.JFrame {
         
         try{
           Class.forName("com.mysql.jdbc.Driver");
-          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+          Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");  // databas connection
           Statement st=con.createStatement();
           
         } catch (ClassNotFoundException | SQLException ex) {
@@ -153,29 +153,29 @@ public class ListCases extends javax.swing.JFrame {
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
         MainMenu a= new MainMenu();
-              a.setVisible(true);
-              dispose();
+              a.setVisible(true);  // öppnar huvudmenyn
+              dispose();  // stänger case list
     }//GEN-LAST:event_ReturnButtonActionPerformed
 
     private void CaseJtableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaseJtableMousePressed
-        if (evt.getClickCount()==2) {
+        if (evt.getClickCount()==2) {  // clickcounten är satt till 2, dubbelklick på ett case
             JTable target = (JTable) evt.getSource();
             int rad = target.getSelectedRow();
             EditCase val;
             
             
        
-            val = new EditCase(target.getValueAt(rad, 0).toString());
-            val.setVisible(true);
-            dispose();
+            val = new EditCase(target.getValueAt(rad, 0).toString()); // Val blir det valda värdet, dvs detta värde är det case som öppnas
+            val.setVisible(true); // öpnar edit case
+            dispose(); // stänger ner case list
             }
 
     }//GEN-LAST:event_CaseJtableMousePressed
 
     private void AddCaseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCaseButton1ActionPerformed
               AddCase a= new AddCase();
-              a.setVisible(true);
-              dispose();
+              a.setVisible(true); // öppnar add case
+              dispose(); // stänger ner case list
     }//GEN-LAST:event_AddCaseButton1ActionPerformed
 
     /**

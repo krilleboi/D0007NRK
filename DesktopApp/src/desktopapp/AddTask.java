@@ -39,9 +39,7 @@ public class AddTask extends javax.swing.JFrame {
     public AddTask() {
         initComponents();
     }
-    DateTime dt = new DateTime();
-    DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-    String dtStr = fmt.print(dt);
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,29 +284,23 @@ public class AddTask extends javax.swing.JFrame {
         
         
         try {
-            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId,Staff_StaffId,StartTime)values(?,?,?,?,?,?,?)";
+            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId,Staff_StaffId)values(?,?,?,?,?,?,)"; //Sql string som lägger in task, status,category, descriptionm och de olika främmande nycklarna i case
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // DB connection
             PreparedStatement t= con.prepareStatement(sql);
             
-            t.setString(1, TaskField.getText());
-            t.setString(2, StatusBox.getSelectedItem().toString());
-            t.setString(3, CategoryBox.getSelectedItem().toString());
-            t.setString(4, DescritionArea.getText());
-            t.setString(5, CaseIdField.getText());
-            t.setString(6, AddStaffField.getText());
+            t.setString(1, TaskField.getText()); // hämtar värdet som användaren lagt till i fältet taskfield
+            t.setString(2, StatusBox.getSelectedItem().toString()); //hämtar värdet som användaren valt i Status comboboxen
+            t.setString(3, CategoryBox.getSelectedItem().toString()); //hämtar värdet som användaren valt i category comboboxen 
+            t.setString(4, DescritionArea.getText()); // hämtar värdet som användaren lagt till i textareat Descriptionarea
+            t.setString(5, CaseIdField.getText()); //hämtar värdet som användaren lagt till i fälted caseidfield
+            t.setString(6, AddStaffField.getText()); //hämtar värdet som användaren lagt till i fältet addstafffield
 
-
-            if(StatusBox.getSelectedItem().equals(Starta)) {
-                t.setString(7, dtStr);
-            }else{
-                t.setString(7, null);
-            }
                 
             t.execute();
             
             
-            JOptionPane.showMessageDialog(null, "You have saved your Task!");
+            JOptionPane.showMessageDialog(null, "You have saved your Task!"); // meddelande som informerar användaren om att den nya arbetsuppgiften lagts till
             
             
                     
@@ -325,14 +317,14 @@ public class AddTask extends javax.swing.JFrame {
 
     private void AddNewTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewTaskActionPerformed
        AddTask a= new AddTask();
-              a.setVisible(true);
-              dispose();
+              a.setVisible(true); // öppnar addtask 
+              dispose(); //Stänger fönstret
     }//GEN-LAST:event_AddNewTaskActionPerformed
 
     private void ReturnCaseListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnCaseListButtonActionPerformed
         ListCases l= new ListCases();
-              l.setVisible(true);
-              dispose();
+              l.setVisible(true); //Öppnar listcases
+              dispose(); //stänger fönstret
     }//GEN-LAST:event_ReturnCaseListButtonActionPerformed
 
     /**

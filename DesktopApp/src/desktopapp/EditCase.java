@@ -38,8 +38,8 @@ public class EditCase extends javax.swing.JFrame {
         initComponents();
         this.caseId = caseId;
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
-            String SQL = ("SELECT * FROM `Case` WHERE `CaseId`= " + caseId);
+            Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");  // databas connection
+            String SQL = ("SELECT * FROM `Case` WHERE `CaseId`= " + caseId);  // sql string för att öppna rätt case i jtable. Detta väljs utifrån det case ID som valts i list cases genom att användaren dubbelklickat på ett case
             st = con.prepareStatement(SQL);
             rs = st.executeQuery();
             loadCase();
@@ -49,11 +49,11 @@ public class EditCase extends javax.swing.JFrame {
         
 
     }
-    private String Starta = "Started";
-    private String Complet = "Completed";
-    DateTime dt = new DateTime();
-    DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-    String dtStr = fmt.print(dt);
+    private String Starta = "Started"; //String starta som innehåller 'started' som används som status
+    private String Complet = "Completed";//String Complet som innehåller 'Completed' som används som status
+    DateTime dt = new DateTime(); // En ny datetime 'dt' som ger ett aktuellt datum
+    DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"); //Datetime formatter som kommer formatera datetimen till en string
+    String dtStr = fmt.print(dt); //Stringen dtStr skapas ur den formaterade datetimen dt
     
     private void loadCase(){
         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
@@ -210,14 +210,14 @@ public class EditCase extends javax.swing.JFrame {
         
         
         try {
-        String sql = "Update `Case` SET Comment = (?) WHERE CaseId =" + caseId;
-        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        String sql = "Update `Case` SET Comment = (?) WHERE CaseId =" + caseId; // sql string för att uppdatera det valda caset
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // database connection
         PreparedStatement s= con.prepareStatement(sql);
             
-            s.setString(1, CommentArea.getText());      
+            s.setString(1, CommentArea.getText());  // hämtar inmatat värde 
             s.execute();
             
-            JOptionPane.showMessageDialog(null, "You have saved your Comment!");
+            JOptionPane.showMessageDialog(null, "You have saved your Comment!");  // meddelande som informerar användaren om att ändringar sparats
             
     } catch (SQLException ex) {
           System.out.println("Exception has occured : " + ex);
@@ -230,15 +230,15 @@ public class EditCase extends javax.swing.JFrame {
     private void StartCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartCaseButtonActionPerformed
         
         try {
-        String sql = "Update `Case` SET Status = (?), StartTime = (?) WHERE CaseId =" + caseId;
-        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        String sql = "Update `Case` SET Status = (?), StartTime = (?) WHERE CaseId =" + caseId; //sql string som uppdaterar status och starttime för det valda caset
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // db connection
         PreparedStatement s= con.prepareStatement(sql);
             
-            s.setString(1, Starta);
-            s.setString(2, dtStr); 
+            s.setString(1, Starta); //Stringen 'starta' läggs in som status 
+            s.setString(2, dtStr); // stringen dtStr som ger det aktuella datumet läggs till i starttime
             s.execute();
             
-            JOptionPane.showMessageDialog(null, "You have started the case!");
+            JOptionPane.showMessageDialog(null, "You have started the case!"); //Meddelande som informaerar användaren om att caset har startats
             
     } catch (SQLException ex) {
           System.out.println("Exception has occured : " + ex);
@@ -247,15 +247,15 @@ public class EditCase extends javax.swing.JFrame {
 
     private void CompleteCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteCaseButtonActionPerformed
         try {
-        String sql = "Update `Case` SET Status = (?), EndTime = (?) WHERE CaseId =" + caseId;
-        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
+        String sql = "Update `Case` SET Status = (?), EndTime = (?) WHERE CaseId =" + caseId; //sql string som uppdaterar status och endtime för det valda caset
+        Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); //Db connection
         PreparedStatement s= con.prepareStatement(sql);
             
-            s.setString(1, Complet);
-            s.setString(2, dtStr); 
+            s.setString(1, Complet); // Stringen complet läggs in som status
+            s.setString(2, dtStr);  // stringen dtStr som ger det aktuella datumet läggs till i starttime
             s.execute();
             
-            JOptionPane.showMessageDialog(null, "You have completed the case!");
+            JOptionPane.showMessageDialog(null, "You have completed the case!"); //Meddelande som informaerar användaren om att caset har färdigställts
             
     } catch (SQLException ex) {
           System.out.println("Exception has occured : " + ex);
@@ -264,8 +264,8 @@ public class EditCase extends javax.swing.JFrame {
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
               ListCases m= new ListCases();
-              m.setVisible(true);
-              dispose();
+              m.setVisible(true); // knapp som tar oss tillbaka till list cases
+              dispose(); // Stänger ned fönstret
     }//GEN-LAST:event_ReturnButtonActionPerformed
 
     /**

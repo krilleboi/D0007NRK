@@ -39,7 +39,7 @@ public class ViewTask extends javax.swing.JFrame {
         this.TaskId = TaskId;
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk");
-            String SQL = ("SELECT * FROM `Task` WHERE `TaskId`= " + TaskId);
+            String SQL = ("SELECT * FROM `Task` WHERE `TaskId`= " + TaskId);  // sql string för att öppna rätt Task i jtable. Detta väljs utifrån det Task ID som valts i list cases genom att användaren dubbelklickat på ett Task
             st = con.prepareStatement(SQL);
             rs = st.executeQuery();
             loadTask();
@@ -120,8 +120,8 @@ public class ViewTask extends javax.swing.JFrame {
 
     private void ReturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButtonActionPerformed
         ListTasks a= new ListTasks();
-        a.setVisible(true);
-        dispose();
+        a.setVisible(true); // knapp som går tillbaka till listTasks
+        dispose(); // stänger ned fönstret
     }//GEN-LAST:event_ReturnButtonActionPerformed
 
     /**
