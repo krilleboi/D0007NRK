@@ -82,7 +82,6 @@ public class EditCase extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        AttestedBox = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         CommentArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -90,6 +89,8 @@ public class EditCase extends javax.swing.JFrame {
         CompleteCaseButton = new javax.swing.JButton();
         StartCaseButton = new javax.swing.JButton();
         ReturnButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        AttestedBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,8 +120,6 @@ public class EditCase extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
-
-        AttestedBox.setText("Attested");
 
         CommentArea.setColumns(20);
         CommentArea.setRows(5);
@@ -156,6 +155,10 @@ public class EditCase extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Attested");
+
+        AttestedBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "0" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,9 +169,7 @@ public class EditCase extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AttestedBox)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(StartCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +178,11 @@ public class EditCase extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
-                                .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ReturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(AttestedBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -188,9 +193,11 @@ public class EditCase extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(AttestedBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AttestedBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,11 +217,12 @@ public class EditCase extends javax.swing.JFrame {
         
         
         try {
-        String sql = "Update `Case` SET Comment = (?) WHERE CaseId =" + caseId; // sql string för att uppdatera det valda caset
+        String sql = "Update `Case` SET (Comment, Attested) values (?, ?) WHERE CaseId =" + caseId; // sql string för att uppdatera det valda caset
         Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // database connection
         PreparedStatement s= con.prepareStatement(sql);
             
             s.setString(1, CommentArea.getText());  // hämtar inmatat värde 
+            s.setString(2, AttestedBox.getSelectedItem().toString());
             s.execute();
             
             JOptionPane.showMessageDialog(null, "You have saved your Comment!");  // meddelande som informerar användaren om att ändringar sparats
@@ -304,7 +312,7 @@ public class EditCase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox AttestedBox;
+    private javax.swing.JComboBox AttestedBox;
     private javax.swing.JTextArea CommentArea;
     private javax.swing.JButton CompleteCaseButton;
     private javax.swing.JButton ReturnButton;
@@ -323,6 +331,7 @@ public class EditCase extends javax.swing.JFrame {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
