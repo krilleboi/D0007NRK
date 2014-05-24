@@ -15,9 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.util.Date;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
 
 
 /**
@@ -284,7 +282,7 @@ public class AddTask extends javax.swing.JFrame {
         
         
         try {
-            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId,Staff_StaffId)values(?,?,?,?,?,?,)"; //Sql string som lägger in task, status,category, descriptionm och de olika främmande nycklarna i case
+            String sql = "Insert into Task (Task,Status,Category,Description,Case_CaseId,Staff_StaffId)values(?,?,?,?,?,?)"; //Sql string som lägger in task, status,category, descriptionm och de olika främmande nycklarna i case
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://aasa.asuscomm.com:3306/d0007nrk","d0007nrk","d0007nrk"); // DB connection
             PreparedStatement t= con.prepareStatement(sql);
